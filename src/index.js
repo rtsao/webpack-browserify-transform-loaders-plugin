@@ -101,7 +101,7 @@ function injectNoLoaders(packageData, packageDirname) {
 
 const DEFAULT_OPTIONS = {
   packageMeta: 'package.json',
-  loadersKeyPath: ['webpack', 'loaders'],
+  loadersKeyPath: ['browserify', 'transform'],
   injectLoaders: injectNoLoaders
 }
 
@@ -161,7 +161,7 @@ export default class PackageLoadersPlugin {
         (testPattern(loader.test, resourceRelative) ||
          testPattern(loader.include, resourceRelative)) &&
         !testPattern(loader.exclude, resourceRelative))
-      .map(loader => resolveLoader(path.dirname(data.resource), loader.loader));
+      .map(loader => resolveLoader(path.dirname(data.resource), "transform?" + loader));
     loaders = await Promise.all(loaders);
     this._loadersByResource[data.resource] = loaders;
     log(`adding ${loaders} loaders for ${resourceRelative} resource`);
