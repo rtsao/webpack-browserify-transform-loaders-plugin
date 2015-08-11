@@ -167,7 +167,7 @@ export default class PackageLoadersPlugin {
     log(`adding ${loaders} loaders for ${resourceRelative} resource`);
     return {
       ...data,
-      loaders: data.loaders.concat(loaders)
+      loaders: loaders.concat(data.loaders)
     };
   }
 
